@@ -24,5 +24,13 @@
     position: absolute;
     display: inline-block;
     cursor: move;
+    tr{
+      &.isActive{
+        &:hover{
+          background-color: yellow;
+        }
+
+      }
+    }
   }
 }
