@@ -8,10 +8,11 @@ TEMPLATEPATH = os.path.join(os.path.dirname(__file__),'templatepath')
 STATICPATH = os.path.join(os.path.dirname(__file__),'static')
 
 class Application( tornado.web.Application  ):
-    
     def __init__(self):
         handlers = [
             ('/',IndexHandler),
+            (r"/static", tornado.web.StaticFileHandler,
+             dict(path=STATICPATH)),
         ]
 
         settings = dict(
