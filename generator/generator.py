@@ -49,35 +49,36 @@ def render_all():
     pass
 
 
-def render_dir(input,output,render_data=None):
+def render_dir(input, output, render_data=None):
     try:
         os.mkdir(output)
     except:
         shutil.rmtree(output)
         os.mkdir(output)
     if not os.path.isabs(input):
-        input = os.path.join(os.getcwd(),input)
+        input = os.path.join(os.getcwd(), input)
     if not os.path.isabs(output):
-        output = os.path.join(os.getcwd(),output)
+        output = os.path.join(os.getcwd(), output)
 
-    if os.path.isdir(output) and os.path.splitext(output)[-1].lower()=='.mako':
-        #function for dir dirname *.mako
+    if os.path.isdir(output) \
+            and os.path.splitext(output)[-1].lower() == '.mako':
+        # function for dir dirname *.mako
         os.rmdir(output)
         print(output)
-    else: 
-        for item in os. listdir(input):
-            path = os.path.join(input,item) #inputpath
-            outpath = os.path.join(output,item) #outputpath
-            if  os.path.isdir(path):
-                render_dir(path,outpath) 
-            elif os.path.isfile(path) and os.path.splitext(path)[-1].lower()=='.mako':
-                #function for file *.mako 
+    else:
+        for item in os.listdir(input):
+            # input path
+            path = os.path.join(input, item)
+            # output path
+            outpath = os.path.join(output, item)
+            if os.path.isdir(path):
+                render_dir(path, outpath)
+            elif os.path.isfile(path) \
+                    and os.path.splitext(path)[-1].lower() == '.mako':
+                # function for file *.mako
                 pass
             else:
-                shutil.copyfile(path,outpath)
-        
-        
-
+                shutil.copyfile(path, outpath)
 
 
 def render_file(template_path, target_path, data):
