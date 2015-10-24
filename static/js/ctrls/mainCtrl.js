@@ -5,7 +5,21 @@
 var app = angular.module('app',[]);
 
 app.controller('mainCtrl', function($scope) {
+    document.allLink = [];
+    $scope.show = function() {
+        console.log(document.allLink);
+    };
 
+    $scope.submit = function() {
+        //先将link合并
+        for (var link=0;link < document.allLink.length;link++) {
+            var obj = $scope.tables[document.allLink[link][0][0]].columns[document.allLink[link][0][1]];
+            obj.relation = {
+                "type": "ManyToOne",
+                "target": $scope.tables[document.allLink[link][1]].name
+            };
+        }
+    };
     $scope.ok = function() {
 
         $scope.editNum = null;
@@ -16,7 +30,6 @@ app.controller('mainCtrl', function($scope) {
     };
 
     $scope.editNum = 1;
-    document.allLink = [];
     $scope.linkContainer = [];
 
     $scope.pushLink = function(i, j) {

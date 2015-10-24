@@ -1,7 +1,9 @@
 #chart{
+  display: inline-block;
   height: 600px;
-  width: 100%;
+  width: 80%;
   overflow: auto;
+  vertical-align: top;
   table{
     input{
       width: 5em;
@@ -9,6 +11,11 @@
   }
 }
 
+#panel{
+  vertical-align: top;
+  width: 20%;
+  display: inline-block;
+}
 #canvas{
   position: relative;
   height: 1000px;
@@ -93,4 +100,20 @@
 #objAspect{
   background-image: url("../imgs/net.jpg");
 }
+.btnRed{
+  background-color: #E36462;
+  color: white;
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
 
+}
+.btnGreen{
+  border: 0;
+  background-color: #97BE6D;
+  color: white;
+   padding: 10px;
+  border-radius: 5px;
+  position: relative;
+}
