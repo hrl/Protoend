@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+__pycache__
+=======
 # IDE file
 .idea/*
 
@@ -72,3 +75,4 @@ docs/_build/
 
 # PyBuilder
 target/
+>>>>>>> 063d55c522a3f8957ccc1f332e831967b5578503
