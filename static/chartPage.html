@@ -10,13 +10,65 @@
     <link type="text/css" rel="stylesheet" href="css/app.css">
     <link type="text/css" rel="stylesheet" href="css/base.css">
 </head>
-<body>
-    <div id="container" class="container">
+<body ng-app="app">
+    <div id="container" class="container" ng-controller="mainCtrl">
+
+
+        <div id="panel"></div>
         <div id="chart">
+            <!--
+            <div my-table sf-table="{{stables[0]}}"></div>
+            -->
+            <table ng-repeat="i in tables" ng-init="p_index=$index">
+                <tr>
+                    <td>name</td>
+                    <td>type</td>
 
-            <table>
+                    <td>relation</td>
 
+                    <td>default</td>
+                    <td>unique</td>
+                    <td>userInput</td>
+                    <td>display</td>
+                </tr>
+                <tr ng-repeat="j in i.columns">
+                    <td><input ng-model="j.name"></td>
+                    <td>
+                        <select ng-model="j.type">
+                            <option>Integer</option>
+                            <option>UnicodeText</option>
+                            <option>GUID</option>
+                            <option>PASSWORD</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td><input ng-model="j.default"></td>
+                    <td>
+                        <select ng-model="j.unique">
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="j.userInput">
+                            <option>true</option>
+                            <option>false</option>
+                            <option>null</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="j.display">
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button ng-click="delItem(p_index, $index)">×</button>
+                    </td>
+                </tr>
             </table>
+
+
         </div>
     </div>
 
@@ -28,5 +80,6 @@
     <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <script src="js/base.js"></script>
     <script src="js/ctrls/mainCtrl.js"></script>
+    <script src="js/directive/mainDirec.js"></script>
 </body>
 </html>
