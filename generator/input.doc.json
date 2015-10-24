@@ -2,7 +2,6 @@ input:
     [Object]
     -> Object: 
         "name": 表名
-        "url": 生成API的url
         "permission": null, 可任意请求
                       "login", 需要登陆
         columns: [Object]
@@ -28,7 +27,6 @@ input:
 [
     {
         "name": "User",
-        "url": "/users",
         "permission": null,
         "columns": [
             {
@@ -55,7 +53,6 @@ input:
     },
     {
         "name": "Blog",
-        "url": "/blogs",
         "permission": "login",
         "columns": [
             {
