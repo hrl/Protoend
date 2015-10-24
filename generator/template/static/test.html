@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>脑洞</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="./css/test.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="./js/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="./js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/simditor.css" />
+    <script type="text/javascript" src="./js/module.js"></script>
+    <script type="text/javascript" src="./js/hotkeys.js"></script>
+    <script type="text/javascript" src="./js/uploader.js"></script>
+    <script type="text/javascript" src="./js/simditor.js"></script>
+    <script src="./js/test.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="height: 300px">
+        <div class="col-md-12">
+            <h1 class="text-center" style="line-height: 300px">
+                <b>脑洞</b>
+            </h1>
+
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row">
+
+        <div class="col-md-10">
+            <div class="page-header">
+                <h1>
+                    大型单页面应用的进阶挑战 <small>张三丰</small>
+                </h1>
+            </div>
+            <p>
+            <div class="topic-firstfloor-detail type">
+                <p><strong>阅读须知：</strong>这里的大型单页面应用（SPA Web App）是指页面和功能组件在一个某个量级以上，举个栗子，比如 30+个页面100+个组件，同时伴随着大量的数据交互操作和多个页面的数据同步操作。并且这里提到的页面，均属于 hash 页面，而多页面概念的页面，是一个独立的 html 文档。基于这个前提，我们再来讨论，否则我怕我们 Get 不到同一个 G 点上去。</p>
+
+                <h2>挑战一：前端组件化</h2>
+
+                <p>基于我们所说的前提，第一个面对的挑战是组件化。这里还是要强调的是组件化根本目的不是为了复用，很多人根本没想明白这点，总是觉得造的轮子别的业务可以用，说不定以后也可以用。</p>
+
+                <p>其实前端发展迭代这么快，交互变化也快，各种适配更新层出不穷。今天造的轮子，过阵子别人造了个高级轮子，大家都会选更高档的轮子，所以现在前端界有一个现象就是为了让别人用自己的轮子，自己使劲不停地造。</p>
+
+                <p>在前端工业化生产趋势下，如果要提高生产效率，就必须让组件规范化标准化，达到怎样的程度呢？一辆车除了底盘和车身框架需要自己设计打造之外，其他标准化零件都可以采购组装（专业学得差，有啥谬误请指正）。也就是说，除了 UI 和前端架构需要自己解决之外，其他的组件都是可以奉行拿来主义的，如果打算让车子跑得更稳更安全，可以对组件进行打磨优化完善。</p>
+
+                <p>说了这么说，倒不如看看徐飞的文章<a href="http://div.io/topic/908" target="_blank">《2015前端组件化框架之路》</a> 里面写的内容都是经过一定实践得出的想法，所以大部分内容我是赞成而且深有体会的。</p>
+
+                <h2>挑战二：路由去中心化</h2>
+
+                <p>基于我们所说的前提，中心化的路由维护起来很坑爹（如果做一两个页面 DEMO 的就没必要出来现眼了）。MV* 架构就是存在这么个坑爹的问题，需要声明中心化 route（angular 和 react 等都需要先声明页面路由结构），针对不同的路由加载哪些组件模块。一旦页面多起来，甚至假如有人偷懒直接在某个路由写了一些业务耦合的逻辑，这个 route 的可维护性就变得有些糟糕了。而且用户访问的第一个页面，都需要加载 route，即使其他路由的代码跟当前页面无关。</p>
+
+                <p>我们再回过头来思考静态页面简单的加载方式。我们只要把 nginx 搭起来，把 html 页面放在对应的静态资源目录下，启动 nginx 服务后，在浏览器地址栏输入 127.0.0.1:8888/index.html 就可以访问到这个页面。再复杂一点，我们把目录整成下面的形式：</p>
+
+<pre><code>/post/201509151800.html
+    /post/201509151905.html
+    /post/201509152001.html
+    /category/js_base_knowledge.html
+    /category/css_junior_use.html
+    /category/life_is_beautiful.html
+</code></pre>
+
+                <p>这种目录结构很熟吧，对 SEO 很友好吧，当然这是后话了，跟我们今天说的不是一回事。这种目录结果，不用我们去给 Web Server 定义一堆路由规则，页面存在即返回，否则返回 404，完全不需要多余的声明逻辑。</p>
+
+                <p>基于这种目录结构，我们可以抽象成这样子：</p>
+
+<pre><code>/{page_type}/{page_name}.html
+</code></pre>
+
+                <p>其实还可以更简单：</p>
+
+<pre><code>/p/{name}.html
+</code></pre>
+
+                <p>从组件化的角度出发，还可以这样子：</p>
+
+<pre><code>/p/{name}/name.js
+    /p/{name}/name.tpl
+    /p/{name}/name.css
+</code></pre>
+
+                <p>所以，按照我们简化后的逻辑，我们只需要一个 page.js 这样一个路由加载器，按照我们约定的资源目录结构去加载相应的页面，我们就不需要去干声明路由并且中心化路由这种蠢事了。具体来看<a href="https://github.com/zack-lin/page/blob/master/index.js" target="_blank">代码</a>。咱也懒得去解析了，里面有注释。</p>
+
+                <h2>挑战三：领域数据中心化</h2>
+
+                <p>对于单向数据流循环和数据双向绑定谁优谁劣是永远也讨论没结果的问题，要看是什么业务场景什么业务逻辑，如果这个前提没统一好说啥都是白搭。当然，这个挑战的前提是非后台的单页面应用，后台的前端根本就不需要考虑前端内存缓存数据的处理，直接跟接口数据库交互就行了。明确了这个前提，我们接着讨论什么叫领域数据中心化。</p>
+
+                <p>前面讨论到两种数据绑定的方式，但是如果频繁跟接口交互：</p>
+
+                <blockquote>
+                    <ul><li>内存数据销毁了，重新请求数据耗时浪费流量</li>
+                        <li>如果两个接口字段部分不一样但是使用场景一样</li>
+                        <li>多个页面直接有部分的数据相同，但是先来后到导致某些计数字段不一致</li>
+                        <li>多个页面的数据相同，其中某些数据发生用户操作行为导致数据发生变动</li>
+                    </ul></blockquote>
+
+                <p>因此，我们需要在业务视图逻辑层和数据接口层中间增加一个 store（领域模型），而这个 store 需要有一个统一的 内存缓存 cache，这个 cache 就是中心化的数据缓存。那这个 store 究竟是用来弄啥勒？</p>
+
+                <p><img src="https://raw.githubusercontent.com/zack-lin/blog/master/201509/assets/store-design.png" alt=""></p>
+
+                <p>Store 具有多形态，每个 store 好比某一类物品的仓储（领域，换个词容易理解），如蔬果店  fruit-store, 服装店 clothes-store，蔬果店可以放苹果香蕉黑木耳，服装店可以放背心底裤人字拖。如果品种过于繁多，我们可以把蔬果店精细化运营变成香蕉专卖店，苹果专卖店（!== appstore），甚至是黑木耳专卖店...( ＿ ＿)ノ｜，蔬果种类不一样，但是也都是称重按斤卖嘛。</p>
+
+                <blockquote>
+                    <p>var bannerStore = new fruitStore();</p>
+
+                    <p>var appleStore = new fruitStore();</p>
+                </blockquote>
+
+                <p>有了这些仓储之后，我们可以放心的把数据丢给视图逻辑层大胆去用。想修改数据？直接让 store 去改就行了，其他页面的 DOM 文本内容也得修改吧？那是其他页面的业务逻辑做的事，我们把事件抛出去就好了，他们处不处理那是他们的事，咱别瞎操心（业务隔离）。</p>
+
+                <p>那么 store 具体弄啥勒？</p>
+
+                <p><img src="https://raw.githubusercontent.com/zack-lin/blog/master/201509/assets/store-example.png" alt=""></p>
+
+                <blockquote>
+                    <ul><li>32 个赞位置可点赞或者取消，三个页面的赞数需要同步，按钮点赞与取消的状态也要同步。</li>
+                        <li>条目是否已收藏，取消收藏后 Page B 需要删除数据，Page A+C 需要同步状态，如果在 Page C 又有收藏操作，Page B 需要相应增减数据，Page A 状态需要同步。</li>
+                        <li>发评论，Page C 需要更新评论列表和评论数，Page A+B 需要更新评论数。如果 Page B 没有被加载过，这时候 Page B 拿到的数据应该是最新的，需要同步给 A+C 页面对应的数据进行更新。</li>
+                    </ul></blockquote>
+
+                <p>所以，store 干的活就是数据状态读写和同步，如果把数据状态的操作放到各个页面自己去处理，页面一旦多了或者复杂起来，就会产生各个页面数据和状态可能不一致，页面之前双向引用（业务耦合严重）。store 还有另一个作用就是数据的输入输出格式化，简单举个栗子：</p>
+
+                <p><img src="https://raw.githubusercontent.com/zack-lin/blog/master/201509/assets/store-input-output-example.jpg" alt=""></p>
+
+                <blockquote>
+                    <ul><li>任何接口 API 返回的数据，都需要经过 input format 进行统一格式化，然后再写入 cache，因为读取的数据已按照我们约定的规范进行的处理，所以我们使用的时候也不需要理会接口是返回怎样的数据类型。</li>
+                        <li>某些组件需要的数据字段格式可能不同，如果把数据处理放在模板进行处理，会导致模板无法更加简洁通用（业务耦合），所以需要 output format 进行处理。</li>
+                    </ul></blockquote>
+
+                <p>所以，store 就是扮演着这样的角色——是数据状态读写和同步，以及数据输入输出的格式化处理。</p>
+
+                <h2>挑战四：Hybrid App 化</h2>
+
+                <p>现在 Hybrid App 架构应用很火啊 _ (:3」∠)_，不搞一下都不好意思说自己是做 H5的。这里所说的 Hybrid App 可不是那种内置打包的 html 源码那种，而是直接去服务端请求 html 文档那种，可能会使用离线缓存。有的人以为如果要使用 Hybrid 架构，就不能使用 SPA 的方式，其实 Hybrid 架构更应该使用 SPA。</p>
+
+                <p>遇到的几个问题，我简单列举一下：</p>
+
+                <ul><li><p>客户端通过 url 传参</p>
+
+                    <blockquote>
+                        <p>如果通过 http get 请求的 query 参数进行传参，会导致命中不到 html 文档缓存，所以通过 SPA 的 hash query 传参，可以规避这个问题。</p>
+                    </blockquote></li>
+                    <li><p>与其他 html 页面进行跳转</p>
+
+                        <blockquote>
+                            <p>这种场景下，进入新页面和返回旧页面导致 webview 会重新加载本地的 html 文档缓存，视觉体验很不爽，即使页面使用了离线缓存，而 SPA 可以规避这个问题。</p>
+                        </blockquote></li>
+                    <li><p>使用了离线缓存的页面需要支持代码多版本化</p>
+
+                        <blockquote>
+                            <p>由于采用了非覆盖性资源发布方式，所以需要仍然保留旧的代码一段时间，以防止用户使用旧的 html 文档访问某些按需加载功能或清除了本地缓存数据而拿不到旧版本代码。</p>
+                        </blockquote></li>
+                    <li><p>js 和 css 资源 离线化</p>
+
+                        <blockquote>
+                            <p>由于离线缓存的资源需要先在 manifest 文件声明，你也不可能总是手动去维护需要引用的 js 和 css 资源，并且那些按需加载的功能也会因此失去按需加载的意义。所以需要将 js 和 css 缓存到 localstorage，直接省去这一步维护操作。至于用户清除 localstorage，参考第三点解决方案。</p>
+                        </blockquote></li>
+                    <li><p>图标资源离线化</p>
+
+                        <blockquote>
+                            <p>将图标文件进行 base64 编码后存入 css 文件，方便离线使用。</p>
+                        </blockquote></li>
+                </ul>
+
+                <h2>挑战五：性能优化</h2>
+
+                <p><a href="https://github.com/fouber/blog" target="_blank">@前端农民工</a> 在 <a href="https://github.com/xufei/blog/issues/5#issuecomment-136962500" target="_blank">别处</a> 已经说得很清楚了，直接传送门过去看吧，这里不罗嗦了。</p>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                    文章
+                </li>
+                <li class="active">
+                    <a href="#">大型单页面应用的进阶挑战</a>
+                </li>
+                <li class="nav-header">
+                    功能列表
+                </li>
+                <li>
+                    <a href="#" id="btn-login">登录</a>
+                </li>
+                <li>
+                    <a href="#" id="btn-signup">注册</a>
+                </li>
+                <li>
+                    <a href="#" id="btn-addBlog">添加文章</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                    <a href="#">帮助</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="badge"></span>
+        </div>
+    </div>
+</div>
+<div class="div-mask">
+</div>
+<div class="div-pop container" id="div-login">
+    <form>
+        <div class="form-group">
+            <p class="bg-info">...</p>
+        </div>
+        <div class="form-group">
+            <label for="login-email">Email address</label>
+            <input type="email" class="form-control" id="login-email" placeholder="Email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" class="form-control" id="login-password" placeholder="Password">
+        </div>
+        <button  type="button" class="btn btn-primary" style="float: right;">登录</button>
+        <button  type="button" class="btn btn-default btn-cancel" style="float: right;  margin-right: 20px" >取消</button>
+    </form>
+</div>
+<div class="div-pop container" id="div-signup">
+    <form>
+        <div class="form-group">
+            <label for="signup-email">Email address</label>
+            <input type="email" class="form-control" id="signup-email" placeholder="Email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" class="form-control" id="signup-password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="signup-password-again">Password</label>
+            <input type="password" class="form-control" id="signup-password-again" placeholder="Password Again">
+        </div>
+        <button  type="button" class="btn btn-primary" style="float: right;">注册</button>
+        <button  type="button" class="btn btn-default btn-cancel" style="float: right;  margin-right: 20px" >取消</button>
+    </form>
+</div>
+<div class="container div-pop" id="editor-container">
+    <form>
+        <div class="form-group">
+            <label for="blog-title">文章标题</label>
+            <input  class="form-control" id="blog-title"  name="blog-title">
+        </div>
+        <div class="form-group">
+            <label for="blog-editor">文本内容</label>
+            <textarea id="blog-editor" placeholder="Balabala" autofocus></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" style="float: right">发布</button>
+        <button type="button" class="btn btn-default btn-cancel" style="float: right;  margin-right: 20px" >取消</button>
+    </form>
+</div>
+</body>
+</html>
