@@ -2,16 +2,12 @@ apps = [
 ]
 
 urls = [
-% for table in tables:
-    <%
-        handler = table['name'] + 'shandler'
-        handler1 = table["name"] + 'Handler'
-    %>
-    (r'/${table["name"]}s/','handlers.${handler}'),
+    % for table in tables:
+    (r'/${table["name"]}s','${table["name"]}.${table["name"]}sHandler'),
     %if table['columns'][0]['type'] == 'GUID':
-    (r'/${table["name"]}s/(?P<id>[0-9a-zA-Z]+)/','handlers.${handler1}')
+    (r'/${table["name"]}s/(?P<key>[0-9a-zA-Z]{32})','${table["name"]}.${table["name"]}Handler'),
     %else:
-    (r'/${table["name"]}s/(?P<id>[0-9]+)/','handlers.${handler1}')
+    (r'/${table["name"]}s/(?P<key>[0-9]+)','${table["name"]}.${table["name"]}Handler'),
     %endif
-% endfor
+    % endfor
 ]
