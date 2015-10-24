@@ -20,18 +20,17 @@
             <button id="real_1-1" class="drawLink">1-1</button>
             <button id="real_n-1" class="drawLink">n-1</button>
         </div>
-        {{allLink}}
         {{linkContainer}}
         <div id="chart">
             <!--
             <div my-table sf-table="{{stables[0]}}"></div>
             -->
             <div id="canvas">
-                <canvas id="realCanvas" class="aspect"></canvas>
-                <div class="aspect">
+                <canvas id="realCanvas" class="aspect" height="1000" width="1000"></canvas>
+                <div class="aspect" id="objAspect">
                     <div ng-repeat="i in tables" class="theTable">
                         <!--浏览模式的表-->
-                        <table ng-init="p_index=$index" ng-if="!tables[$index].editing">
+                        <table ng-init="p_index=$index" ng-if="!tables[$index].editing" theIndex="{{$index}}">
                             <tr ng-repeat="j in i.columns" ng-click="pushLink_1(p_index, $index)">
                                 <td><span>{{j.name}}</span></td>
                                 <td>

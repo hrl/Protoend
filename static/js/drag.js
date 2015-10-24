@@ -15,6 +15,14 @@ $(document).ready(function() {
                     };
 
             callback.call(this, e, posix);
+            ctx.clearRect(0,0,1000,1000);
+
+            for(var i in document.allLink) {
+                document.drawLine(document.allLink[i]);
+            }
+            console.log(document.allLink);
+
+
         }
     });
 

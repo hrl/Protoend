@@ -5,7 +5,7 @@
 var app = angular.module('app',[]);
 
 app.controller('mainCtrl', function($scope) {
-    $scope.allLink = [];
+    document.allLink = [];
     $scope.linkContainer = [];
 
     $scope.pushLink_1 = function(i, j) {
@@ -16,9 +16,10 @@ app.controller('mainCtrl', function($scope) {
                 container.push([i, j]);
                 //加上函数：下一个只能选整个表
             } else if (container.length == 1) {
-                $scope.allLink.push([container[0], i]);
-                container.length = 0;
+                document.allLink.push([container[0], i]);
                 //画图
+                document.drawLine([container[0], i]);
+                container.length = 0;
             }
 
         }
