@@ -19,9 +19,6 @@ from .. import baseValidators
 </%text>
 <%
     prime_column = table["columns"][0]
-    column_default = {
-        "GUID": "uuid.uuid4()"
-    }
 %>
 
 
