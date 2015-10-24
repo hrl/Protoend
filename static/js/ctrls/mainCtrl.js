@@ -66,7 +66,7 @@ app.controller('mainCtrl', function($scope) {
                     display: false
                 }
             ],
-            editing: true
+            editing: false
         }
     ];
 

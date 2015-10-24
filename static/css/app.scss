@@ -17,8 +17,12 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    //解决表格溢出时出现的不和谐现象
+    overflow: hidden;
   }
-  .table{
-    //position: absolute;
+  .theTable{
+    position: absolute;
+    display: inline-block;
+    cursor: move;
   }
 }

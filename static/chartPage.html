@@ -26,7 +26,7 @@
             <div id="canvas">
                 <canvas class="aspect"></canvas>
                 <div class="aspect">
-                    <div ng-repeat="i in tables" class="table">
+                    <div ng-repeat="i in tables" class="theTable">
                         <!--浏览模式的表-->
                         <table ng-if="!tables[$index].editing">
 
@@ -125,5 +125,6 @@
     <script src="js/base.js"></script>
     <script src="js/ctrls/mainCtrl.js"></script>
     <script src="js/directive/mainDirec.js"></script>
+    <script src="js/drag.js"></script>
 </body>
 </html>
