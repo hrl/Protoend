@@ -8,7 +8,7 @@ app.controller('mainCtrl', function($scope) {
     document.allLink = [];
     $scope.linkContainer = [];
 
-    $scope.pushLink_1 = function(i, j) {
+    $scope.pushLink = function(i, j) {
         if(document.status == 'link') {
             var container = $scope.linkContainer;
 
@@ -16,27 +16,16 @@ app.controller('mainCtrl', function($scope) {
                 container.push([i, j]);
                 //加上函数：下一个只能选整个表
             } else if (container.length == 1) {
-                document.allLink.push([container[0], i]);
-                //画图
-                document.drawLine([container[0], i]);
+                //自己不能连自己
+                if(container[0][0] != i) {
+                    document.allLink.push([container[0], i]);
+                    document.drawLine([container[0], i]);
+                }
                 container.length = 0;
             }
 
         }
     };
-
-    /*
-    $scope.pushLink_2 = function(i) {
-        if(document.status == 'link') {
-            var container = $scope.linkContainer;
-
-            if (container.length == 1) {
-                $scope.allLink.push([container[0], i]);
-            }
-            container.length = 0;
-        }
-    };
-    */
 
     //删除第i个表的第j行
     $scope.delItem = function(i, j) {
@@ -63,13 +52,17 @@ app.controller('mainCtrl', function($scope) {
 
     };
     //新建一张表
-    $scope.createTable = function() {
-        var newData = {
-            name: 'name',
-            permission: 'null',
-            columns: []
-        };
-        $scope.tables.push(newData);
+    $scope.createTable = function($event) {
+        if(document.status == 'add') {
+            var newData = {
+                name: 'name',
+                permission: 'null',
+                columns: [],
+                editing: true,
+                coor: [$event.offsetX, $event.offsetY]
+            };
+            $scope.tables.push(newData);
+        }
     };
 
     $scope.tables = [

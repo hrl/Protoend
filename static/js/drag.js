@@ -20,14 +20,12 @@ $(document).ready(function() {
             for(var i in document.allLink) {
                 document.drawLine(document.allLink[i]);
             }
-            console.log(document.allLink);
-
-
         }
     });
 
 //要改成document.on
     $(document).on('click', '.theTable', function(e) {
+        //移动
         if(document.status == 'move') {
             if (!document.move) {
                 var offset = {top: $(this)[0].offsetTop, left: $(this)[0].offsetLeft};
@@ -39,10 +37,16 @@ $(document).ready(function() {
                 document.status = null;
             }
         }
+
     });
 
     //使表处于可移动状态
     $(document).on('click', '#move', function(e) {
         document.status = 'move';
+    });
+
+    //使表处于可移动状态
+    $(document).on('click', '#createTable', function(e) {
+        document.status = 'add';
     });
 });

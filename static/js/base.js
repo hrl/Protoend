@@ -5,3 +5,5 @@
 
 var c=document.getElementById("realCanvas");
 var ctx=c.getContext("2d");
+
+document.editNum = null;

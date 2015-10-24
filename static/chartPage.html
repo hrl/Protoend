@@ -16,22 +16,20 @@
 
         <div id="panel">
             <button id="move">move</button>
-            <button id="createTable" ng-click="createTable()">new Table</button>
-            <button id="real_1-1" class="drawLink">1-1</button>
-            <button id="real_n-1" class="drawLink">n-1</button>
+            <button id="createTable">new Table</button>
+            <button id="real_1-1" class="drawLink">link</button>
         </div>
-        {{linkContainer}}
         <div id="chart">
             <!--
             <div my-table sf-table="{{stables[0]}}"></div>
             -->
             <div id="canvas">
                 <canvas id="realCanvas" class="aspect" height="1000" width="1000"></canvas>
-                <div class="aspect" id="objAspect">
-                    <div ng-repeat="i in tables" class="theTable">
+                <div class="aspect" id="objAspect" ng-click="createTable($event)">
+                    <div ng-repeat="i in tables" class="theTable" style="left:{{i.coor[0]}}px;top:{{i.coor[1]}}px;">
                         <!--浏览模式的表-->
-                        <table ng-init="p_index=$index" ng-if="!tables[$index].editing" theIndex="{{$index}}">
-                            <tr ng-repeat="j in i.columns" ng-click="pushLink_1(p_index, $index)">
+                        <table ng-init="p_index=$index" ng-if="!document.editNum==$index" theIndex="{{$index}}">
+                            <tr ng-repeat="j in i.columns" ng-click="pushLink(p_index, $index)">
                                 <td><span>{{j.name}}</span></td>
                                 <td>
                                     <span>{{j.type}}</span>
@@ -53,7 +51,7 @@
                         </table>
 
                         <!--编辑模式的表-->
-                        <table ng-init="p_index=$index" ng-if="tables[$index].editing">
+                        <table ng-init="p_index=$index" ng-if="document.editNum==$index">
                             <tr>
                                 <td>name</td>
                                 <td>type</td>
