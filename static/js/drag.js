@@ -20,13 +20,21 @@ $(document).ready(function() {
 
 //要改成document.on
     $(document).on('click', '.theTable', function(e) {
-        if(!document.move) {
-            var offset = {top: $(this)[0].offsetTop, left: $(this)[0].offsetLeft};
+        if(document.status == 'move') {
+            if (!document.move) {
+                var offset = {top: $(this)[0].offsetTop, left: $(this)[0].offsetLeft};
 
-            this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
-            $.extend(document, {'move': true, 'move_target': this});
-        } else {
-            $.extend(document, {'move': false});
+                this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
+                $.extend(document, {'move': true, 'move_target': this});
+            } else {
+                $.extend(document, {'move': false});
+                document.status = null;
+            }
         }
+    });
+
+    //使表处于可移动状态
+    $(document).on('click', '#move', function(e) {
+        document.status = 'move';
     });
 });

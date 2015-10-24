@@ -1,0 +1,65 @@
+html{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  @extend html;
+}
+
+.wrapper{
+  background-color: #EEB65B;
+  height: 100%;
+  width: 100%;
+}
+
+#btn-start{
+  position: absolute;
+  bottom: 15%;
+  width: 254px;
+  height: 94px;
+  background-image: url('../imgs/1414298342.jpg');
+  margin: 0 353px;
+  line-height: 90px;
+  font-size: 50px;
+  color: #FEE5BD;
+  text-align: center;
+}
+
+.icon-container{
+  position: absolute;
+  bottom: 35%;
+  height: 240px;
+  font-size: 0;
+}
+
+.icon-inline{
+  margin: auto;
+  height: 240px;
+}
+
+.icon-wrapper{
+  display: inline-block;
+  width: 180px;
+  margin: 0 70px;
+}
+
+.icon-text{
+  display: block;
+  width: 180px;
+  color:white;
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+  font-size: 30px;
+}
+
+#intro-container{
+  position: absolute;
+  top:30%;
+  width: 960px;
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}

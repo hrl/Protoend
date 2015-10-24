@@ -15,50 +15,40 @@
 
 
         <div id="panel">
+            <button id="move">move</button>
             <button id="createTable" ng-click="createTable()">new Table</button>
-            <button id="real_1-1">1-1</button>
-            <button id="real_n-1">n-1</button>
+            <button id="real_1-1" class="drawLink">1-1</button>
+            <button id="real_n-1" class="drawLink">n-1</button>
         </div>
+        {{allLink}}
+        {{linkContainer}}
         <div id="chart">
             <!--
             <div my-table sf-table="{{stables[0]}}"></div>
             -->
             <div id="canvas">
-                <canvas class="aspect"></canvas>
+                <canvas id="realCanvas" class="aspect"></canvas>
                 <div class="aspect">
                     <div ng-repeat="i in tables" class="theTable">
                         <!--浏览模式的表-->
-                        <table ng-if="!tables[$index].editing">
-
-                            <tr ng-repeat="j in i.columns">
-                                <td><input ng-model="j.name"></td>
+                        <table ng-init="p_index=$index" ng-if="!tables[$index].editing">
+                            <tr ng-repeat="j in i.columns" ng-click="pushLink_1(p_index, $index)">
+                                <td><span>{{j.name}}</span></td>
                                 <td>
-                                    <select ng-model="j.type">
-                                        <option>Integer</option>
-                                        <option>UnicodeText</option>
-                                        <option>GUID</option>
-                                        <option>PASSWORD</option>
-                                    </select>
-                                </td>
-                                <td></td>
-                                <td><input ng-model="j.default"></td>
-                                <td>
-                                    <select ng-model="j.unique" \
-                                            ng-options="o.v as o.n for o in [{ n: 'false', v: false }, { n: 'true', v: true }]">
-                                    </select>
+                                    <span>{{j.type}}</span>
                                 </td>
                                 <td>
-                                    <select ng-model="j.userInput"
-                                            ng-options="o.v as o.n for o in [{n:'true',v:true},{n:'false',v:false},{n:'null',v:null}]">
-                                    </select>
+                                    <span ng-if="j.default">defalut:{{j.default}}</span>
                                 </td>
                                 <td>
-                                    <select ng-model="j.display"
-                                            ng-options="o.v as o.n for o in [{n:'true',v:true},{n:'false',v:false}]">
-                                    </select>
+                                    <span ng-if="j.unique">unique</span>
                                 </td>
                                 <td>
-                                    <button ng-click="delItem(p_index, $index)">×</button>
+                                    <span ng-if="j.userInput==true">mustInput</span>
+                                    <span ng-if="j.userInput==false">can'tInput</span>
+                                </td>
+                                <td>
+                                    <span >{{j.display?'display':'cover'}}</span>
                                 </td>
                             </tr>
                         </table>
@@ -126,5 +116,6 @@
     <script src="js/ctrls/mainCtrl.js"></script>
     <script src="js/directive/mainDirec.js"></script>
     <script src="js/drag.js"></script>
+    <script src="js/link.js"></script>
 </body>
 </html>
