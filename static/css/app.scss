@@ -1,5 +1,5 @@
 #chart{
-  height: 400px;
+  height: 600px;
   width: 100%;
   overflow: auto;
   table{
@@ -21,9 +21,33 @@
     overflow: hidden;
   }
   .theTable{
+    border: 1px #a3a3a3 solid;
+    box-shadow: 3px 3px 3px #d4cccc;
     position: absolute;
     display: inline-block;
     cursor: move;
+    border-top-left-radius: 10px;
+    background-color: #61ABE8;
+    border-top-right-radius: 10px;
+    .tableBody{
+      padding: 15px;
+    }
+    li{
+      color: #E9B84C;
+      span{
+        color: white;
+      }
+    }
+    .tableHead{
+      padding: 15px;
+      input{
+        background-color: transparent;
+        border: 0;
+      }
+      h2{
+        margin: 0;
+      }
+    }
     tr{
       &.isActive{
         &:hover{
@@ -32,9 +56,41 @@
 
       }
     }
+    td{
+
+      border: 1px solid transparent;
+    }
+
+    color: white;
+    hr{
+      margin: 0px;
+      background-color: white;
+      height: 2px;
+    }
+    .edit{
+      input{
+        background-color: transparent;
+      }
+      color: #333;
+      table{
+        background-color: #f7f7f7;
+      }
+      hr{
+        background-color: #61ABE8;
+      }
+      tr{
+      }
+      .field{
+        background-color: #E0E0E0;
+      }
+    }
   }
 }
 
+.close{
+  float: right;
+}
 #objAspect{
   background-image: url("../imgs/net.jpg");
 }
+

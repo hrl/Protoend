@@ -15,9 +15,9 @@
 
 
         <div id="panel">
-            <button id="move">move</button>
-            <button id="createTable">new Table</button>
-            <button id="real_1-1" class="drawLink">link</button>
+            <button id="move" ng-disabled="editNum!=null">move</button>
+            <button id="createTable" ng-disabled="editNum!=null">new Table</button>
+            <button id="real_1-1" class="drawLink" ng-disabled="editNum!=null">link</button>
         </div>
         <div id="chart">
             <!--
@@ -27,75 +27,98 @@
                 <canvas id="realCanvas" class="aspect" height="1000" width="1000"></canvas>
                 <div class="aspect" id="objAspect" ng-click="createTable($event)">
                     <div ng-repeat="i in tables" class="theTable" style="left:{{i.coor[0]}}px;top:{{i.coor[1]}}px;">
+                        <div class="tableHead">
+                            <span class="close">×</span>
+                            <h2 ng-if="!(editNum==$index)">{{i.name}}</h2>
+                            <p>
+                                <input ng-if="editNum==$index" ng-model="i.name">
+                            </p>
+                            <input ng-if="editNum==$index" ng-model="i.permission">
+                        </div>
+                        <hr>
                         <!--浏览模式的表-->
-                        <table ng-init="p_index=$index" ng-if="!document.editNum==$index" theIndex="{{$index}}">
-                            <tr ng-repeat="j in i.columns" ng-click="pushLink(p_index, $index)">
-                                <td><span>{{j.name}}</span></td>
-                                <td>
-                                    <span>{{j.type}}</span>
-                                </td>
-                                <td>
-                                    <span ng-if="j.default">defalut:{{j.default}}</span>
-                                </td>
-                                <td>
-                                    <span ng-if="j.unique">unique</span>
-                                </td>
-                                <td>
-                                    <span ng-if="j.userInput==true">mustInput</span>
-                                    <span ng-if="j.userInput==false">can'tInput</span>
-                                </td>
-                                <td>
-                                    <span >{{j.display?'display':'cover'}}</span>
-                                </td>
-                            </tr>
-                        </table>
+                        <div ng-if="!(editNum==$index)" class="tableBody">
+                            <p>permission</p>
+                            <p>column</p>
+                            <table ng-init="p_index=$index" theIndex="{{$index}}">
+                                <tr ng-repeat="j in i.columns" ng-click="pushLink(p_index, $index)">
+                                    <td>
+                                        <li>
+                                            <span>
+                                                {{j.name}}
+                                            </span>
+                                            <span>{{j.type}}</span>
+                                        </li>
+                                    </td>
+                                    <!--
+                                    <td>
+                                        <span ng-if="j.default">defalut:{{j.default}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="j.unique">unique</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="j.userInput==true">mustInput</span>
+                                        <span ng-if="j.userInput==false">can'tInput</span>
+                                    </td>
+                                    <td>
+                                        <span >{{j.display?'display':'cover'}}</span>
+                                    </td>
+                                    -->
+                                </tr>
+                            </table>
+                            <button ng-click="editNum==$index?ok():edit($index)">{{editNum==$index?'ok':'edit'}}</button>
+                        </div>
 
                         <!--编辑模式的表-->
-                        <table ng-init="p_index=$index" ng-if="document.editNum==$index">
-                            <tr>
-                                <td>name</td>
-                                <td>type</td>
+                        <div ng-if="editNum==$index" class="edit">
+                            <table ng-init="p_index=$index">
+                                <tr class="field">
+                                    <td>name</td>
+                                    <td>type</td>
+                                    <td>default</td>
+                                    <td>unique</td>
+                                    <td>userInput</td>
+                                    <td>display</td>
+                                    <td></td>
+                                </tr>
+                                <tr ng-repeat="j in i.columns" class="otherField">
+                                    <td>
+                                        <input ng-model="j.name">
+                                    </td>
+                                    <td>
+                                        <select ng-model="j.type">
+                                            <option>Integer</option>
+                                            <option>UnicodeText</option>
+                                            <option>GUID</option>
+                                            <option>PASSWORD</option>
+                                        </select>
+                                    </td>
+                                    <td><input ng-model="j.default"></td>
+                                    <td>
+                                        <select ng-model="j.unique" \
+                                                ng-options="o.v as o.n for o in [{ n: 'false', v: false }, { n: 'true', v: true }]">
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="j.userInput"
+                                                ng-options="o.v as o.n for o in [{n:'true',v:true},{n:'false',v:false},{n:'null',v:null}]">
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="j.display"
+                                                ng-options="o.v as o.n for o in [{n:'true',v:true},{n:'false',v:false}]">
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button ng-click="delItem(p_index, $index)">×</button>
+                                    </td>
+                                </tr>
+                            </table>
 
-                                <td>relation</td>
-
-                                <td>default</td>
-                                <td>unique</td>
-                                <td>userInput</td>
-                                <td>display</td>
-                            </tr>
-                            <tr ng-repeat="j in i.columns">
-                                <td><input ng-model="j.name"></td>
-                                <td>
-                                    <select ng-model="j.type">
-                                        <option>Integer</option>
-                                        <option>UnicodeText</option>
-                                        <option>GUID</option>
-                                        <option>PASSWORD</option>
-                                    </select>
-                                </td>
-                                <td></td>
-                                <td><input ng-model="j.default"></td>
-                                <td>
-                                    <select ng-model="j.unique" \
-                                            ng-options="o.v as o.n for o in [{ n: 'false', v: false }, { n: 'true', v: true }]">
-                                    </select>
-                                </td>
-                                <td>
-                                    <select ng-model="j.userInput"
-                                            ng-options="o.v as o.n for o in [{n:'true',v:true},{n:'false',v:false},{n:'null',v:null}]">
-                                    </select>
-                                </td>
-                                <td>
-                                    <select ng-model="j.display"
-                                            ng-options="o.v as o.n for o in [{n:'true',v:true},{n:'false',v:false}]">
-                                    </select>
-                                </td>
-                                <td>
-                                    <button ng-click="delItem(p_index, $index)">×</button>
-                                </td>
-                            </tr>
-                        </table>
-                        <button ng-click="createItem($index)">+</button>
+                            <button ng-click="createItem($index)">+</button>
+                            <button ng-click="editNum==$index?ok():edit($index)">{{editNum==$index?'ok':'edit'}}</button>
+                        </div>
 
                     </div>
                 </div>
