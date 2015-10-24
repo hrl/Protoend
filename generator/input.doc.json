@@ -12,7 +12,7 @@ input:
                     可选: GUID, PASSWORD, Unicode(length), UnicodeText, Integer
             "relation": [Object]
             -> Object:
-                "type": 关系类型, 可选: OneToOne, OneToMany
+                "type": 关系类型, 可选: "OneToOne", "ManyToOne"
                 "target": 关系对象, 如"User"
             "default": 数据默认值, 为空视为null
                        可选: GUID, 类型与type相同的值
