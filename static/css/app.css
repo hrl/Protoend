@@ -1,5 +1,5 @@
 #chart {
-  height: 400px;
+  height: 600px;
   width: 100%;
   overflow: auto; }
   #chart table input {
@@ -15,11 +15,49 @@
     position: absolute;
     overflow: hidden; }
   #canvas .theTable {
+    border: 1px #a3a3a3 solid;
+    box-shadow: 3px 3px 3px #d4cccc;
     position: absolute;
     display: inline-block;
-    cursor: move; }
+    cursor: move;
+    border-top-left-radius: 10px;
+    background-color: #61ABE8;
+    border-top-right-radius: 10px;
+    color: white; }
+    #canvas .theTable .tableBody {
+      padding: 15px; }
+    #canvas .theTable li {
+      color: #E9B84C; }
+      #canvas .theTable li span {
+        color: white; }
+    #canvas .theTable .tableHead {
+      padding: 15px; }
+      #canvas .theTable .tableHead input {
+        background-color: transparent;
+        border: 0; }
+      #canvas .theTable .tableHead h2 {
+        margin: 0; }
     #canvas .theTable tr.isActive:hover {
       background-color: yellow; }
+    #canvas .theTable td {
+      border: 1px solid transparent; }
+    #canvas .theTable hr {
+      margin: 0px;
+      background-color: white;
+      height: 2px; }
+    #canvas .theTable .edit {
+      color: #333; }
+      #canvas .theTable .edit input {
+        background-color: transparent; }
+      #canvas .theTable .edit table {
+        background-color: #f7f7f7; }
+      #canvas .theTable .edit hr {
+        background-color: #61ABE8; }
+      #canvas .theTable .edit .field {
+        background-color: #E0E0E0; }
+
+.close {
+  float: right; }
 
 #objAspect {
   background-image: url("../imgs/net.jpg"); }

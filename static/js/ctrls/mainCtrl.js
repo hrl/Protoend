@@ -5,6 +5,17 @@
 var app = angular.module('app',[]);
 
 app.controller('mainCtrl', function($scope) {
+
+    $scope.ok = function() {
+
+        $scope.editNum = null;
+    };
+    $scope.edit = function(i) {
+
+        $scope.editNum = i;
+    };
+
+    $scope.editNum = 1;
     document.allLink = [];
     $scope.linkContainer = [];
 
@@ -55,20 +66,21 @@ app.controller('mainCtrl', function($scope) {
     $scope.createTable = function($event) {
         if(document.status == 'add') {
             var newData = {
-                name: 'name',
-                permission: 'null',
+                name: null,
+                permission: null,
                 columns: [],
                 editing: true,
                 coor: [$event.offsetX, $event.offsetY]
             };
             $scope.tables.push(newData);
+            document.status = null;
         }
     };
 
     $scope.tables = [
         {
             name: 'name',
-            permission: 'null',
+            permission: null,
             columns: [
                 {
                     name: 'filedName',
@@ -88,12 +100,11 @@ app.controller('mainCtrl', function($scope) {
                     userInput: false,
                     display: false
                 }
-            ],
-            editing: false
+            ]
         },
         {
             name: 'ame',
-            permission: 'null',
+            permission: null,
             columns: [
                 {
                     name: 'filedName',
@@ -113,8 +124,7 @@ app.controller('mainCtrl', function($scope) {
                     userInput: false,
                     display: false
                 }
-            ],
-            editing: false
+            ]
         }
     ];
 
