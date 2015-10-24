@@ -1,5 +1,6 @@
 input:
-    [Object]
+    "models": ["User"]
+    "tables": [Object]
     -> Object: 
         "name": 表名
         "permission": null, 可任意请求
@@ -9,7 +10,7 @@ input:
         -> Object:
             "name": 键名
             "type": 数据类型
-                    可选: GUID, PASSWORD, Unicode(length), UnicodeText, Integer
+                    可选: GUID, Unicode(length), UnicodeText, Integer
             "relation": [Object]
             -> Object:
                 "type": 关系类型, 可选: "OneToOne", "ManyToOne"
@@ -24,63 +25,42 @@ input:
             "display": 是否显示在输出中, 为空视为true
                        可选: true, false
 
-[
-    {
-        "name": "User",
-        "permission": null,
-        "columns": [
-            {
-                "name": "id",
-                "type": "GUID",
-                "default": "GUID",
-                "userInput": false
-            },
-            {
-                "name": "username",
-                "type": "Unicode(20)"
-            },
-            {
-                "name": "password",
-                "type": "PASSWORD",
-                "display": false
-            },
-            {
-                "name": "mail",
-                "type": "CHAR(128)",
-                "unique": true
-            }
-        ]
-    },
-    {
-        "name": "Blog",
-        "permission": "login",
-        "columns": [
-            {
-                "name": "id",
-                "type": "GUID",
-                "default": "GUID",
-                "userInput": false
-            },
-            {
-                "name": "owner",
-                "type": "GUID",
-                "ralation": {
-                    "type": "OneToOne",
-                    "target": "User"
+{
+    "models": [
+        "User"
+    ],
+    "tables": [
+        {
+            "name": "Blog",
+            "permission": "login",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "GUID",
+                    "default": "GUID",
+                    "userInput": false
                 },
-                "default": "{current_user}",
-                "userInput": false
-            },
-            {
-                "name": "title",
-                "type": "Unicode(20)",
-                "display": true
-            },
-            {
-                "name": "detail",
-                "type": "UnicodeText",
-                "display": true
-            }
-        ]
-    }
-]
+                {
+                    "name": "owner",
+                    "type": "GUID",
+                    "relation": {
+                        "type": "ManyToOne",
+                        "target": "User"
+                    },
+                    "default": "{current_user}",
+                    "userInput": false
+                },
+                {
+                    "name": "title",
+                    "type": "Unicode(20)",
+                    "display": true
+                },
+                {
+                    "name": "detail",
+                    "type": "UnicodeText",
+                    "display": true
+                }
+            ]
+        }
+    ]
+}
