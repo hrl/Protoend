@@ -1,3 +1,6 @@
+import tornado.web
+from settings import site_settings
+
 apps = [
     # (r'/prefix', 'app_name')
     # appA
@@ -8,4 +11,6 @@ apps = [
 
 urls = [
     # (r'relative_url', 'RequestHandler')
+    (r"/static", tornado.web.StaticFileHandler,
+     dict(path=site_settings['static_path'])),
 ]
