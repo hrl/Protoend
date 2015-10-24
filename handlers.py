@@ -29,7 +29,7 @@ class IndexHandler(BaseHandler):
 
         base_dir = os.path.dirname(__file__)
         static_dir = os.path.join(base_dir, 'static/')
-        generator_template_dir = os.path.join(base_dir, 'generator/template.')
+        generator_template_dir = os.path.join(base_dir, 'generator/template')
         generator_output_base_dir = os.path.join(static_dir, 'generator/')
 
         random_value = ''.join(
