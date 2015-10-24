@@ -1,0 +1,17 @@
+#chart {
+  height: 400px;
+  width: 100%;
+  overflow: auto; }
+  #chart table input {
+    width: 5em; }
+
+#canvas {
+  position: relative;
+  height: 1000px;
+  width: 1000px; }
+  #canvas .aspect {
+    height: 100%;
+    width: 100%;
+    position: absolute; }
+
+/*# sourceMappingURL=app.css.map */
