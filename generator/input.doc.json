@@ -1,0 +1,84 @@
+input:
+    [Object]
+    -> Object: 
+        "name": 表名
+        "url": 生成API的url
+        "permission": null, 可任意请求
+                      "login", 需要登陆
+        columns: [Object]
+        第一个Object视为主键,自动设置unique为true
+        -> Object:
+            "name": 键名
+            "type": 数据类型
+                    可选: GUID, PASSWORD, Unicode(length), UnicodeText, Integer
+            "foreign": 关联的外键, 为空视为null
+                       可选: 外键位置, 如"User.id"; null, 无外键约束
+            "default": 数据默认值, 为空视为null
+                       可选: GUID, 类型与type相同的值
+                             若为外键可选: "{变量名}", 如"{current_user.id}"
+            "unique": 是否唯一, 为空视为false
+                      可选: true, false
+            "userInput": 用户是否输入, 为空视为true
+                         可选: true, 用户必须输入; false, 用户不可输入(表单中不会显示); null, 用户可以不输入(表单中会显示)
+            "display": 是否显示在输出中, 为空视为true
+                       可选: true, false
+
+[
+    {
+        "name": "User",
+        "url": "/users",
+        "permission": null,
+        "columns": [
+            {
+                "name": "id",
+                "type": "GUID",
+                "default": "GUID",
+                "userInput": false
+            },
+            {
+                "name": "username",
+                "type": "Unicode(20)"
+            },
+            {
+                "name": "password",
+                "type": "PASSWORD",
+                "display": false
+            },
+            {
+                "name": "mail",
+                "type": "CHAR(128)",
+                "unique": true
+            }
+        ]
+    },
+    {
+        "name": "Blog",
+        "url": "/blogs",
+        "permission": "login",
+        "columns": [
+            {
+                "name": "id",
+                "type": "GUID",
+                "default": "GUID",
+                "userInput": false
+            },
+            {
+                "name": "owner",
+                "type": "GUID",
+                "foreign": "User.id",
+                "default": "{current_user.id}",
+                "userInput": false
+            },
+            {
+                "name": "title",
+                "type": "Unicode(20)",
+                "display": true
+            },
+            {
+                "name": "detail",
+                "type": "UnicodeText",
+                "display": true
+            }
+        ]
+    }
+]
