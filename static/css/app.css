@@ -12,6 +12,13 @@
   #canvas .aspect {
     height: 100%;
     width: 100%;
-    position: absolute; }
+    position: absolute;
+    overflow: hidden; }
+  #canvas .theTable {
+    position: absolute;
+    display: inline-block;
+    cursor: move; }
+    #canvas .theTable tr.isActive:hover {
+      background-color: yellow; }
 
 /*# sourceMappingURL=app.css.map */
