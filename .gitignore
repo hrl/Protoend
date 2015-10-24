@@ -1,6 +1,6 @@
-<<<<<<< HEAD
-__pycache__
-=======
+# test file
+test_*
+
 # IDE file
 .idea/*
 
@@ -14,9 +14,6 @@ cache/*
 
 # Database
 *.db
-
-# Setting
-settings.py
 
 # ropeproject
 .ropeproject/
@@ -75,4 +72,3 @@ docs/_build/
 
 # PyBuilder
 target/
->>>>>>> 063d55c522a3f8957ccc1f332e831967b5578503
