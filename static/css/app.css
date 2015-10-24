@@ -21,4 +21,7 @@
     #canvas .theTable tr.isActive:hover {
       background-color: yellow; }
 
+#objAspect {
+  background-image: url("../imgs/net.jpg"); }
+
 /*# sourceMappingURL=app.css.map */
