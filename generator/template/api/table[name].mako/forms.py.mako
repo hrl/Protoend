@@ -20,7 +20,7 @@ from .. import baseValidators
 <%
     prime_column = table["columns"][0]
     column_default = {
-        "GUID": "uuid.uuid4()"
+        "GUID": "uuid.uuid4()",
     }
 %>
 

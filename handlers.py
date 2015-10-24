@@ -3,17 +3,21 @@ import tornado.gen
 from tornado.escape import json_encode
 import time 
 from threading import Thread 
+from generator import generator
+import os
 
 class Worker(Thread):
 
     def __init__(self,req):
         self.req = req
+        self.input_path = os.path.join(os.getcwd(),'generator/template')
+        self.output_path = os.path.join(os.getcwd(),'static/files')
         super(Worker,self).__init__()
 
     def run(self):
         #do the function here
-        time.sleep(1)
-        self.req.response['path'] = 'aa'
+        generator.render_all(self.input_path,self.output_path,self.output_path,self.req.data)
+        self.req.response['path'] = os.path.join('/static/files','backend.tar')
 
 
 class BaseHandler( tornado.web.RequestHandler ):
@@ -38,8 +42,9 @@ class IndexHandler( BaseHandler ):
     #@tornado.web.asynchronous 
     #@tornado.gen.engine
     def post(self):
-        data = self.get_body_argument('data','')
-        if data:
+        self.data = self.get_body_argument('data','')
+        self.name = self.get_argument('name','')
+        if self.data and self.filename:
             self.response = {}
             p = Worker(self)
             p.start()

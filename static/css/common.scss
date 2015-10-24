@@ -1,0 +1,113 @@
+html{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  @extend html;
+}
+
+.wrapper{
+  background-color: #EEB65B;
+  height: 100%;
+  width: 100%;
+}
+
+#btn-start{
+  position: relative;
+  top: 45%;
+  width: 254px;
+  height: 94px;
+  background-image: url('../imgs/1414298342.jpg');
+  margin: 0 auto;
+  line-height: 90px;
+  font-size: 50px;
+  color: #FEE5BD;
+  text-align: center;
+}
+
+.icon-container{
+  position: relative;
+  top:35%;
+  width: 960px;
+  margin: auto;
+  height: 240px;
+  font-size: 0;
+}
+
+
+.icon-inline{
+  margin: auto;
+  height: 240px;
+}
+
+.icon-wrapper{
+  display: inline-block;
+  width: 180px;
+  margin: 0 70px;
+}
+
+.icon-text{
+  display: block;
+  width: 180px;
+  color:white;
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+  font-size: 30px;
+}
+#intro-logo{
+  position: relative;
+  display: block;
+  width: 215px;
+  margin: 0 auto 0 auto;
+  top: 120px;
+}
+#intro-container{
+  position: relative;
+  top: 25%;
+  width: 960px;
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+.pp-tableCell{
+  display: block;
+}
+
+.thumbnail-container{
+  @extend .icon-container;
+  height: auto;
+  width: 1380px;
+  margin: auto;
+  top: 200px;
+}
+
+.thumbnail-wrapper{
+  @extend  .icon-wrapper;
+  display: none;
+  width: 360px;
+  margin: 0 50px;
+  img{
+    width: inherit;
+  }
+}
+
+.thumbnail-text{
+  @extend .icon-text;
+  width: 200px;
+  margin:0 auto 40px auto;
+  border: {
+    style: solid;
+    color: white;
+    width: 2px;
+    radius: 10px;
+  };
+}
+#logo-second{
+  position: absolute;
+  top: 50px;
+  left: 70px;
+}
