@@ -1,0 +1,24 @@
+#chart{
+  height: 400px;
+  width: 100%;
+  overflow: auto;
+  table{
+    input{
+      width: 5em;
+    }
+  }
+}
+
+#canvas{
+  position: relative;
+  height: 1000px;
+  width: 1000px;
+  .aspect{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+  .table{
+    //position: absolute;
+  }
+}
