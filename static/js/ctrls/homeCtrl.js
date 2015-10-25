@@ -36,9 +36,9 @@ homeCtrl.controller('homeCtrll', function ($scope) {
         });
     });
     $(".thumbnail-wrapper").on("click",function(){
-        $.fn.pagepiling.moveSectionDown();
+        window.location= "#editor";
     });
     $("#btn-start").on("click",function(){
-        $.fn.pagepiling.moveSectionDown();
+        $.fn.pagepiling.moveSectionDown()
     })
 });

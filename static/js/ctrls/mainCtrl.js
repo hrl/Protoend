@@ -4,7 +4,7 @@
 
 var app = angular.module('app',[]);
 
-app.controller('mainCtrl', function($scope) {
+app.controller('mainCtrl', function($scope, $rootScope) {
     document.allLink = [];
 
     $scope.submit = function() {
@@ -27,7 +27,8 @@ app.controller('mainCtrl', function($scope) {
             contentType: 'application/json',
             success: function (data) {
                 $scope.$apply(function () {
-                    //.......
+                    $rootScope.tar=data.tar;
+                    $rootScope.doc=data.doc;
                 });
             }
         });

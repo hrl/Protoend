@@ -120,4 +120,55 @@ body{
   width: 494px;
   margin: auto;
 }
+#container{
+  position: relative;
+  top: 140px;
+  background-color: white;
+  height: 700px;
+}
+#a{
+  top: 170px;
+}
 
+#panel{
+  div {
+    &:first-child{
+      margin-top: 100px;
+    }
+    margin-bottom: 20px;
+    button {
+      width: 120px;
+    }
+  }
+}
+#chart{
+  height: 100%;
+  overflow: hidden;
+}
+
+#bar3{
+  position: relative;
+  top: 600px;
+}
+#pic-box{
+  display: block;
+  position: relative;
+  top: 300px;
+  width: 180px;
+  margin: 0 auto;
+}
+
+
+#down-text{
+  height: 100px;
+  line-height: 50px;
+  font-size: 30px;
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  position: relative;
+  top: 400px;
+  text-align: center;
+
+}
