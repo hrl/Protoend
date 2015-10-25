@@ -12,9 +12,13 @@
 }
 
 #panel{
+  text-align: center;
   vertical-align: top;
   width: 20%;
   display: inline-block;
+  button{
+    margin-top: 20px;
+  }
 }
 #canvas{
   position: relative;

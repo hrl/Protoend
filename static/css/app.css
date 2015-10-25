@@ -8,9 +8,12 @@
     width: 5em; }
 
 #panel {
+  text-align: center;
   vertical-align: top;
   width: 20%;
   display: inline-block; }
+  #panel button {
+    margin-top: 20px; }
 
 #canvas {
   position: relative;
