@@ -1,11 +1,11 @@
 /**
  * Created by hook on 10/24/15.
  */
-var Angular = angular.module('protoend', ['ngRoute', 'homeCtrl']);
+var Angular = angular.module('protoend', ['ngRoute', 'homeCtrl', 'app']);
 Angular.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
         when('/', {templateUrl: './templates/home.html'}).
-    //    //when('/phones/:phoneId', {templateUrl: 'partials/phone-detail.html', controller: PhoneDetailCtrl}).
+        when('/editor', {templateUrl: './templates/chartPage.html', controller: 'mainCtrl'}).
         otherwise({redirectTo: '/'});
 
 }]);

@@ -175,6 +175,91 @@ app.controller('mainCtrl', function($scope) {
             ]
         }
     ];
+    $('#chart').mousemove(function(e) {
+        if (!!document.move) {
+            var posix = !document.move_target ? {'x': 0, 'y': 0} : document.move_target.posix,
+                callback = document.call_down || function() {
+                        $(document.move_target).css({
+                            'top': e.pageY - posix.y,
+                            'left': e.pageX - posix.x
+                        });
+                    };
+
+            callback.call(this, e, posix);
+            ctx.clearRect(0,0,1000,1000);
+
+            for(var i in document.allLink) {
+                document.drawLine(document.allLink[i]);
+            }
+        }
+    });
+
+//要改成document.on
+    $(document).on('click', '.theTable', function(e) {
+        //移动
+        if(document.status == 'move') {
+            if (!document.move) {
+                var offset = {top: $(this)[0].offsetTop, left: $(this)[0].offsetLeft};
+
+                this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
+                $.extend(document, {'move': true, 'move_target': this});
+            } else {
+                $.extend(document, {'move': false});
+                document.status = null;
+            }
+        }
+
+    });
+
+    //使表处于可移动状态
+    $(document).on('click', '#move', function(e) {
+        document.status = 'move';
+    });
+
+    //使表处于可移动状态
+    $(document).on('click', '#createTable', function(e) {
+        document.status = 'add';
+    });
+    $('.drawLink').click(function() {
+        $('.theTable tr').addClass('isActive');
+        document.status = 'link';
+    });
+
+//画线
+    document.drawLine = function(mapping) {
+        //mapping [  [1, 2]  ,   3    ]
+        //如果要随机的话，要在生成mapping时就搞好
+
+
+        var aspect = $('#objAspect');
+        var startObj = $('[theindex='+mapping[0][0]+'] tr:nth-child('+(mapping[0][1]+1)+')');
+        var endObj = $('[theindex='+mapping[1]+'] tr:nth-child(1)');
+        if(1) {
+            //从左边
+            var start = [startObj.offset().left-aspect.offset().left,startObj.offset().top+startObj.height()/2-aspect.offset().top];
+            var end = [endObj.offset().left-aspect.offset().left,endObj.offset().top+endObj.height()/2-aspect.offset().top];
+            ctx.lineWidth = 1;
+            var x = Math.min(start[0], end[0]) - 20;
+            var second = [x, start[1]];
+            var third = [x, end[1]];
+            ctx.beginPath();
+            ctx.moveTo(start[0], start[1]);
+            ctx.lineTo(second[0], second[1]);
+            ctx.lineTo(third[0], third[1]);
+            ctx.lineTo(end[0], end[1]);
+            ctx.stroke();
+            ctx.closePath();
+
+        } else {
+            //从右边
+
+
+        }
+    };
+    var c=document.getElementById("realCanvas");
+    var ctx=c.getContext("2d");
+
+    document.editNum = 1;
 
 
 });
