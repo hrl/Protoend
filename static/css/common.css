@@ -68,28 +68,36 @@ body {
 
 .thumbnail-container {
   height: auto;
-  width: 1380px;
+  width: 1260px;
   margin: auto;
-  top: 200px; }
+  top: 240px;
+  border-bottom: inset 2px #4A4A4A; }
 
 .thumbnail-wrapper {
-  display: none;
   width: 360px;
-  margin: 0 50px; }
+  margin: 0 30px; }
   .thumbnail-wrapper img {
     width: inherit; }
 
 .thumbnail-text {
-  width: 200px;
+  width: 160px;
   margin: 0 auto 40px auto;
   border-style: solid;
   border-color: white;
   border-width: 2px;
-  border-radius: 10px; }
+  border-radius: 10px;
+  height: 50px;
+  line-height: 50px; }
 
 #logo-second {
   position: absolute;
   top: 50px;
   left: 70px; }
+
+.progress-bar {
+  position: relative;
+  top: 300px;
+  width: 494px;
+  margin: auto; }
 
 /*# sourceMappingURL=common.css.map */

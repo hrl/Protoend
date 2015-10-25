@@ -3,7 +3,7 @@
  */
 
 var homeCtrl = angular.module('homeCtrl',[]);
-homeCtrl.controller('homeCtrl', function () {
+homeCtrl.controller('homeCtrll', function ($scope) {
     $(document).ready(function() {
         $('#pagepiling').pagepiling({
             menu: null,
@@ -27,12 +27,18 @@ homeCtrl.controller('homeCtrl', function () {
             onLeave: function(index, nextIndex, direction){},
             afterLoad: function(anchorLink, index){
                 if(index == 2){
-                    $("#thumbnail1").fadeIn(1000).css('display', 'inline-block');
-                    $("#thumbnail2").fadeIn(1600).css('display', 'inline-block');
-                    $("#thumbnail3").fadeIn(2200).css('display', 'inline-block');
+                    //$("#thumbnail1").fadeIn(1000).css('display', 'inline-block');
+                    //$("#thumbnail2").fadeIn(1600).css('display', 'inline-block');
+                    //$("#thumbnail3").fadeIn(2200).css('display', 'inline-block');
                 }
             },
             afterRender: function(){}
         });
     });
+    $(".thumbnail-wrapper").on("click",function(){
+        $.fn.pagepiling.moveSectionDown();
+    });
+    $("#btn-start").on("click",function(){
+        $.fn.pagepiling.moveSectionDown();
+    })
 });
