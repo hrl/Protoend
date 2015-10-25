@@ -136,7 +136,8 @@ class QueryHandlerMixin():
         if form.validate():
             if Model is not None:
                 query = self.session.query(Model)
-            objects_query = self.apply_order(query, form)
+            #objects_query = self.apply_order(query, form)
+            objects_query = query
             objects = objects_query.all()
 
             response = list()

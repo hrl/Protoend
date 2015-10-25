@@ -1,4 +1,5 @@
 <%text>import json
+import uuid
 
 import models
 from .. import base
@@ -28,7 +29,7 @@ class ${table["name"]}sHandler(base.APIBaseHandler):
     @base.authenticated()
     % endif
     def post(self):
-        form = forms.${table["name"]}sForm(
+        form = forms.${table["name"]}Form(
             self.json_args,
             locale_code=self.locale.code
         )
@@ -48,7 +49,7 @@ class ${table["name"]}sHandler(base.APIBaseHandler):
         ${table["name"]} = models.${table["name"]}(
             % for column in table["columns"]:
             % if column["userInput"] == False:
-            ${column["name"]}=${column_default.get(column["name"], None)},
+            ${column["name"]}=${column_default.get(column["type"], None)},
             % else:
             ${column["name"]}=form.${column["name"]}.data,
             % endif
@@ -92,7 +93,7 @@ class ${table["name"]}Handler(base.APIBaseHandler):
         attr_list = [
             % for column in table["columns"]:
             % if column["userInput"] != False:
-            ${column["name"]},
+            '${column["name"]}',
             % endif
             % endfor
         ]
