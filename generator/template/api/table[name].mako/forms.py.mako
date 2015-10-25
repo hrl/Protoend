@@ -1,4 +1,5 @@
 <%text>from form import Form
+import uuid
 from wtforms.fields import (
     Field,
     IntegerField,
