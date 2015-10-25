@@ -9,6 +9,9 @@ if __name__ == "__main__":
     from settings import site_settings
     import urls
     import util
+    import database
+
+    database.init_db()
 
     try:
         port = int(sys.argv[1])
