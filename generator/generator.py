@@ -51,7 +51,9 @@ def parse_raw_input(data):
 def render_all(input_path, output_path, tar_path, render_data):
     render_data = parse_raw_input(json.loads(render_data))
     render_dir(input_path, output_path, render_data)
-
+    apiinput_path = os.path.join(output_path,'api')
+    apioutput_path = os.path.join(output_path,'apidoc')
+    os.system('apidoc -i %s -o %s'%(apiinput_path,apioutput_path))
     tar = tarfile.open(tar_path, 'w')
     tar.add(output_path, 'backend')
     tar.close()
