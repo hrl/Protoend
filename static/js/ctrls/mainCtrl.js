@@ -128,50 +128,50 @@ app.controller('mainCtrl', function($scope, $rootScope) {
 
     $scope.tables = [
         {
-            name: 'name',
+            name: 'Table1',
             permission: null,
             columns: [
                 {
-                    name: 'filedName',
-                    type: 'Integer',
+                    name: 'id',
+                    type: 'GUID',
+                    relation: null,
+                    default: 'GUID',
+                    unique: true,
+                    userInput: false,
+                    display: true
+                },
+                {
+                    name: 'title',
+                    type: 'UnicodeText',
                     relation: null,
                     default: null,
                     unique: false,
                     userInput: true,
                     display: true
-                },
-                {
-                    name: 'filedName',
-                    type: 'UnicodeText',
-                    relation: null,
-                    default: 1,
-                    unique: false,
-                    userInput: false,
-                    display: false
                 }
             ]
         },
         {
-            name: 'ame',
+            name: 'Table2',
             permission: null,
             columns: [
                 {
-                    name: 'filedName',
-                    type: 'Integer',
+                    name: 'id',
+                    type: 'GUID',
                     relation: null,
-                    default: null,
-                    unique: false,
-                    userInput: true,
+                    default: 'GUID',
+                    unique: true,
+                    userInput: false,
                     display: true
                 },
                 {
-                    name: 'filedName',
-                    type: 'UnicodeText',
+                    name: 'relation',
+                    type: 'GUID',
                     relation: null,
-                    default: 1,
+                    default: null,
                     unique: false,
-                    userInput: false,
-                    display: false
+                    userInput: null,
+                    display: true
                 }
             ]
         }
