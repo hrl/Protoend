@@ -2,6 +2,7 @@ import string
 import random
 import os
 import os.path
+import json
 
 import tornado.web
 import tornado.gen
@@ -46,4 +47,7 @@ class IndexHandler(BaseHandler):
                              generator_output_tar,
                              data)
 
-        self.redirect('/static/generator/' + random_value + '.tar')
+        self.finish(json.dumps({
+            'tar': '/static/generator/' + random_value + '.tar',
+            'doc': '/static/generator/' + random_value + '/apidoc/index.html'
+        }))
