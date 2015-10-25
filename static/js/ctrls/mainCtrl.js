@@ -7,6 +7,10 @@ var app = angular.module('app',[]);
 app.controller('mainCtrl', function($scope, $rootScope) {
     document.allLink = [];
 
+    var c=document.getElementById("realCanvas");
+    var ctx=c.getContext("2d");
+
+    document.editNum = 1;
     $scope.submit = function() {
         //先将link合并
         for (var link = 0; link < document.allLink.length; link++) {
@@ -177,6 +181,7 @@ app.controller('mainCtrl', function($scope, $rootScope) {
         }
     ];
     $('#chart').mousemove(function(e) {
+        console.log(111);
         if (!!document.move) {
             var posix = !document.move_target ? {'x': 0, 'y': 0} : document.move_target.posix,
                 callback = document.call_down || function() {
@@ -195,26 +200,12 @@ app.controller('mainCtrl', function($scope, $rootScope) {
         }
     });
 
-//要改成document.on
-    $(document).on('click', '.theTable', function(e) {
-        //移动
-        if(document.status == 'move') {
-            if (!document.move) {
-                var offset = {top: $(this)[0].offsetTop, left: $(this)[0].offsetLeft};
 
-                this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
-                $.extend(document, {'move': true, 'move_target': this});
-            } else {
-                $.extend(document, {'move': false});
-                document.status = null;
-            }
-        }
-
-    });
 
     //使表处于可移动状态
     $(document).on('click', '#move', function(e) {
         document.status = 'move';
+        //
     });
 
     //使表处于可移动状态
@@ -257,10 +248,24 @@ app.controller('mainCtrl', function($scope, $rootScope) {
 
         }
     };
-    var c=document.getElementById("realCanvas");
-    var ctx=c.getContext("2d");
 
-    document.editNum = 1;
 
+
+});
+//要改成document.on
+$(document).on('click', '.theTable', function(e) {
+    //移动
+    console.log(document.status);
+    if(document.status == 'move') {
+        if (!document.move) {
+            var offset = {top: $(this)[0].offsetTop, left: $(this)[0].offsetLeft};
+
+            this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
+            $.extend(document, {'move': true, 'move_target': this});
+        } else {
+            $.extend(document, {'move': false});
+            document.status = null;
+        }
+    }
 
 });
