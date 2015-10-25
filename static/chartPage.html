@@ -15,14 +15,21 @@
 
 
         <div id="panel">
-            <button id="move" ng-disabled="editNum!=null">move</button>
-            <button id="createTable" ng-disabled="editNum!=null">new Table</button>
-            <button id="real_1-1" class="drawLink" ng-disabled="editNum!=null">link</button>
-        </div>
-        <div id="chart">
-            <!--
-            <div my-table sf-table="{{stables[0]}}"></div>
-            -->
+            <div>
+                <button id="move" ng-disabled="editNum!=null" class="btnRed">move</button>
+            </div>
+            <div>
+                <button id="createTable" ng-disabled="editNum!=null" class="btnRed">new Table</button>
+            </div>
+            <div>
+                <button id="real_1-1" class="drawLink btnRed" ng-disabled="editNum!=null" >link</button>
+            </div>
+            <div>
+                <button id="submit" ng-disabled="editNum!=null" class="btnGreen" ng-click="submit()">submit</button>
+            </div>
+        </div
+        ><div id="chart">
+        {{tables}}
             <div id="canvas">
                 <canvas id="realCanvas" class="aspect" height="1000" width="1000"></canvas>
                 <div class="aspect" id="objAspect" ng-click="createTable($event)">
@@ -31,9 +38,9 @@
                             <span class="close">×</span>
                             <h2 ng-if="!(editNum==$index)">{{i.name}}</h2>
                             <p>
-                                <input ng-if="editNum==$index" ng-model="i.name">
+                                <input ng-if="editNum==$index" ng-model="i.name" placeholder="name">
                             </p>
-                            <input ng-if="editNum==$index" ng-model="i.permission">
+                            <input ng-if="editNum==$index" ng-model="i.permission" placeholder="permission">
                         </div>
                         <hr>
                         <!--浏览模式的表-->
