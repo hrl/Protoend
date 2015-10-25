@@ -20,10 +20,11 @@ app.controller('mainCtrl', function($scope) {
         $.ajax({
             url: "/",
             type: 'POST',
-            data: {
+            data: JSON.stringify({
                 "modules": ["User"],
                 "tables": $scope.tables
-            },
+            }),
+            contentType: 'application/json',
             success: function (data) {
                 $scope.$apply(function () {
                     //.......
@@ -70,6 +71,20 @@ app.controller('mainCtrl', function($scope) {
     //删除第i张表
     $scope.delTable = function(i) {
         $scope.tables.splice(i, 1);
+
+        //删除相应的relation
+        for(var i in document.allLink) {
+            var a = document.allLink[i];
+            if(a[0][0] == i || a[1] == i) {
+                document.allLink.splice(i, 1);
+                console.log('rela');
+            }
+
+        }
+        ctx.clearRect(0,0,1000,1000);
+        for(var i in document.allLink) {
+            document.drawLine(document.allLink[i]);
+        }
     };
 
     //新增一条
@@ -90,9 +105,18 @@ app.controller('mainCtrl', function($scope) {
     $scope.createTable = function($event) {
         if(document.status == 'add') {
             var newData = {
-                name: null,
+                //随机
+                name: 'Table' + $event.offsetX,
                 permission: null,
-                columns: [],
+                columns: [{
+                    name: 'id',
+                    type: 'Integer',
+                    relation: null,
+                    default: null,
+                    unique: true,
+                    userInput: false,
+                    display: true
+                }],
                 editing: true,
                 coor: [$event.offsetX, $event.offsetY]
             };

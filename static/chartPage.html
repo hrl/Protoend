@@ -35,7 +35,7 @@
                 <div class="aspect" id="objAspect" ng-click="createTable($event)">
                     <div ng-repeat="i in tables" class="theTable" style="left:{{i.coor[0]}}px;top:{{i.coor[1]}}px;">
                         <div class="tableHead">
-                            <span class="close">×</span>
+                            <span class="close" ng-click="delTable($index)">×</span>
                             <h2 ng-if="!(editNum==$index)">{{i.name}}</h2>
                             <p>
                                 <input ng-if="editNum==$index" ng-model="i.name" placeholder="name">
